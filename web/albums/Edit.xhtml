@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditAlbumsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditAlbumsLabel_albumID}" for="albumID" />
+                    <h:inputText id="albumID" value="#{albumsController.selected.albumID}" title="#{bundle.EditAlbumsTitle_albumID}" required="true" requiredMessage="#{bundle.EditAlbumsRequiredMessage_albumID}"/>
+                    <h:outputLabel value="#{bundle.EditAlbumsLabel_albumName}" for="albumName" />
+                    <h:inputText id="albumName" value="#{albumsController.selected.albumName}" title="#{bundle.EditAlbumsTitle_albumName}" />
+                    <h:outputLabel value="#{bundle.EditAlbumsLabel_releaseYear}" for="releaseYear" />
+                    <h:inputText id="releaseYear" value="#{albumsController.selected.releaseYear}" title="#{bundle.EditAlbumsTitle_releaseYear}" />
+                    <h:outputLabel value="#{bundle.EditAlbumsLabel_artistID}" for="artistID" />
+                    <h:selectOneMenu id="artistID" value="#{albumsController.selected.artistID}" title="#{bundle.EditAlbumsTitle_artistID}" >
+                        <f:selectItems value="#{artistsController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{albumsController.update}" value="#{bundle.EditAlbumsSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditAlbumsViewLink}"/>
+                <br />
+                <h:commandLink action="#{albumsController.prepareList}" value="#{bundle.EditAlbumsShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditAlbumsIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

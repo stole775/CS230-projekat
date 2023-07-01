@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewArtistsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewArtistsLabel_artistID}"/>
+                    <h:outputText value="#{artistsController.selected.artistID}" title="#{bundle.ViewArtistsTitle_artistID}"/>
+                    <h:outputText value="#{bundle.ViewArtistsLabel_artistName}"/>
+                    <h:outputText value="#{artistsController.selected.artistName}" title="#{bundle.ViewArtistsTitle_artistName}"/>
+                    <h:outputText value="#{bundle.ViewArtistsLabel_username}"/>
+                    <h:outputText value="#{artistsController.selected.username}" title="#{bundle.ViewArtistsTitle_username}"/>
+                    <h:outputText value="#{bundle.ViewArtistsLabel_password}"/>
+                    <h:outputText value="#{artistsController.selected.password}" title="#{bundle.ViewArtistsTitle_password}"/>
+                    <h:outputText value="#{bundle.ViewArtistsLabel_genre}"/>
+                    <h:outputText value="#{artistsController.selected.genre}" title="#{bundle.ViewArtistsTitle_genre}"/>
+                    <h:outputText value="#{bundle.ViewArtistsLabel_country}"/>
+                    <h:outputText value="#{artistsController.selected.country}" title="#{bundle.ViewArtistsTitle_country}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{artistsController.destroyAndView}" value="#{bundle.ViewArtistsDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewArtistsEditLink}"/>
+                <br />
+                <h:commandLink action="#{artistsController.prepareCreate}" value="#{bundle.ViewArtistsCreateLink}" />
+                <br />
+                <h:commandLink action="#{artistsController.prepareList}" value="#{bundle.ViewArtistsShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewArtistsIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

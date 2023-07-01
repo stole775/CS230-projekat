@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListSongsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListSongsEmpty}" rendered="#{songsController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{songsController.items.rowCount > 0}">
+                    <h:outputText value="#{songsController.pagination.pageFirstItem + 1}..#{songsController.pagination.pageLastItem + 1}/#{songsController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{songsController.previous}" value="#{bundle.Previous} #{songsController.pagination.pageSize}" rendered="#{songsController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{songsController.next}" value="#{bundle.Next} #{songsController.pagination.pageSize}" rendered="#{songsController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{songsController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSongsTitle_songID}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.songID}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSongsTitle_songName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.songName}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSongsTitle_durationInSeconds}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.durationInSeconds}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSongsTitle_albumID}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.albumID}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{songsController.prepareView}" value="#{bundle.ListSongsViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{songsController.prepareEdit}" value="#{bundle.ListSongsEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{songsController.destroy}" value="#{bundle.ListSongsDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{songsController.prepareCreate}" value="#{bundle.ListSongsCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListSongsIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

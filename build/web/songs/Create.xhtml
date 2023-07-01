@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateSongsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateSongsLabel_songID}" for="songID" />
+                    <h:inputText id="songID" value="#{songsController.selected.songID}" title="#{bundle.CreateSongsTitle_songID}" required="true" requiredMessage="#{bundle.CreateSongsRequiredMessage_songID}"/>
+                    <h:outputLabel value="#{bundle.CreateSongsLabel_songName}" for="songName" />
+                    <h:inputText id="songName" value="#{songsController.selected.songName}" title="#{bundle.CreateSongsTitle_songName}" />
+                    <h:outputLabel value="#{bundle.CreateSongsLabel_durationInSeconds}" for="durationInSeconds" />
+                    <h:inputText id="durationInSeconds" value="#{songsController.selected.durationInSeconds}" title="#{bundle.CreateSongsTitle_durationInSeconds}" />
+                    <h:outputLabel value="#{bundle.CreateSongsLabel_albumID}" for="albumID" />
+                    <h:selectOneMenu id="albumID" value="#{songsController.selected.albumID}" title="#{bundle.CreateSongsTitle_albumID}" >
+                        <f:selectItems value="#{albumsController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{songsController.create}" value="#{bundle.CreateSongsSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{songsController.prepareList}" value="#{bundle.CreateSongsShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateSongsIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListArtistsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListArtistsEmpty}" rendered="#{artistsController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{artistsController.items.rowCount > 0}">
+                    <h:outputText value="#{artistsController.pagination.pageFirstItem + 1}..#{artistsController.pagination.pageLastItem + 1}/#{artistsController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{artistsController.previous}" value="#{bundle.Previous} #{artistsController.pagination.pageSize}" rendered="#{artistsController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{artistsController.next}" value="#{bundle.Next} #{artistsController.pagination.pageSize}" rendered="#{artistsController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{artistsController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArtistsTitle_artistID}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.artistID}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArtistsTitle_artistName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.artistName}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArtistsTitle_username}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.username}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArtistsTitle_password}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.password}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArtistsTitle_genre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.genre}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArtistsTitle_country}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.country}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{artistsController.prepareView}" value="#{bundle.ListArtistsViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{artistsController.prepareEdit}" value="#{bundle.ListArtistsEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{artistsController.destroy}" value="#{bundle.ListArtistsDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{artistsController.prepareCreate}" value="#{bundle.ListArtistsCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListArtistsIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

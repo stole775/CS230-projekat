@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateArtistsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateArtistsLabel_artistID}" for="artistID" />
+                    <h:inputText id="artistID" value="#{artistsController.selected.artistID}" title="#{bundle.CreateArtistsTitle_artistID}" required="true" requiredMessage="#{bundle.CreateArtistsRequiredMessage_artistID}"/>
+                    <h:outputLabel value="#{bundle.CreateArtistsLabel_artistName}" for="artistName" />
+                    <h:inputText id="artistName" value="#{artistsController.selected.artistName}" title="#{bundle.CreateArtistsTitle_artistName}" />
+                    <h:outputLabel value="#{bundle.CreateArtistsLabel_username}" for="username" />
+                    <h:inputText id="username" value="#{artistsController.selected.username}" title="#{bundle.CreateArtistsTitle_username}" />
+                    <h:outputLabel value="#{bundle.CreateArtistsLabel_password}" for="password" />
+                    <h:inputText id="password" value="#{artistsController.selected.password}" title="#{bundle.CreateArtistsTitle_password}" />
+                    <h:outputLabel value="#{bundle.CreateArtistsLabel_genre}" for="genre" />
+                    <h:inputText id="genre" value="#{artistsController.selected.genre}" title="#{bundle.CreateArtistsTitle_genre}" />
+                    <h:outputLabel value="#{bundle.CreateArtistsLabel_country}" for="country" />
+                    <h:inputText id="country" value="#{artistsController.selected.country}" title="#{bundle.CreateArtistsTitle_country}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{artistsController.create}" value="#{bundle.CreateArtistsSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{artistsController.prepareList}" value="#{bundle.CreateArtistsShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateArtistsIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
